@@ -9,7 +9,7 @@ public class Main {
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 		sb = new StringBuilder();
 		mini = new int[9];
-		result = new int[7]; // 9C7 조합
+		result = new int[7]; // 9C7 = 9C2 조합
 		for(int i=0; i<9; i++) {
 			mini[i] = Integer.parseInt(bf.readLine());
 		}
@@ -20,7 +20,7 @@ public class Main {
 	static void comb(int cnt, int start, int sum) {
 		if(sum > 100) return;
 		if(cnt == 7) {
-			if(sum == 100) {
+			if(sum == 100 && result[0] !=0) {
 				for(int i=0; i<7; i++)
 					sb.append(result[i]).append("\n");
 			}
