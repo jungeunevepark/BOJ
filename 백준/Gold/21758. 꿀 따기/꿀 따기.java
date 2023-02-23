@@ -25,29 +25,42 @@ public class Main {
 		}
 		for(int i=0; i<N; i++) {
 			h = i;
-			comb(0, 0);
+			// 양 끝
+			if(h != 0 && h != N-1) {
+				comb[0] = 0; comb[1] = N-1;
+				curc();
+				// 계산
+			}
+			// 가장 왼쪽 + 왼쪽 부근
+			if(h != 0 && h != 1) {
+				comb[0] = 0;
+				for(int k=1; k<h; k++) {
+					comb[1] = k;
+					curc();
+				}
+			}
+			// 가장 오른쪽 + 오른쪽 부근
+			if(h != N-1 && h != N-2) {
+				comb[1] = N-1;
+				for(int k = h+1; k<N-1; k++) {
+					comb[0] = k;
+					curc();
+				}
+			}
 		}
 		System.out.println(max);
 	}
-	static void comb(int cnt, int start) {
-		if(cnt == 2) {
-			int sum = 0;
-			if(comb[0] < h && h < comb[1]) {
-				sum = (d[h] - d[comb[0]]) + (d[comb[1]-1] - d[h] + honey[h]);
-			}
-			else if(comb[0] > h) {
-				sum = (d[comb[0]-1] - d[h] + honey[h]) + (d[comb[1]-1] - d[h] + honey[h] - honey[comb[0]]);		
-			}
-			else {
-				sum = (d[h] - d[comb[0]] - honey[comb[1]]) + (d[h] - d[comb[1]]);								
-			}
-			max = Math.max(max, sum);
-			return;
+	static void curc() {
+		int sum = 0;
+		if(comb[0] < h && h < comb[1]) {
+			sum = (d[h] - d[comb[0]]) + (d[comb[1]-1] - d[h] + honey[h]);
 		}
-		for(int i=start; i<N; i++) {
-			if(i == h) continue;
-			comb[cnt] = i;
-			comb(cnt+1, i+1);
+		else if(comb[0] > h) {
+			sum = (d[comb[0]-1] - d[h] + honey[h]) + (d[comb[1]-1] - d[h] + honey[h] - honey[comb[0]]);		
 		}
+		else {
+			sum = (d[h] - d[comb[0]] - honey[comb[1]]) + (d[h] - d[comb[1]]);								
+		}
+		max = Math.max(max, sum);
 	}
 }
