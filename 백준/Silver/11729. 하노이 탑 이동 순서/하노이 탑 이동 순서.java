@@ -11,7 +11,8 @@ public class Main {
 		N = Integer.parseInt(bf.readLine());
 		
 		hanoi(N, 1, 2, 3);
-		System.out.println(count);
+		//System.out.println(count);
+		sb.insert(0, count+"\n");
 		System.out.println(sb.toString());
 	}
 	static void hanoi(int n, int from, int mid, int to) {
